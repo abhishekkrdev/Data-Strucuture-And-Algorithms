@@ -74,6 +74,83 @@ class LinkedList {
         }
         console.log(result + "null");
     }
+
+    // Method to delete a node from the start (head)
+    deleteFromStart() {
+        if (!this.head) {
+            console.log("The list is empty.");
+            return;
+        }
+        // Move the head to the next node, effectively removing the first node
+        this.head = this.head.next;
+    }
+
+    // Method to delete the last node
+    deleteLastNode() {
+        if (!this.head) {
+            console.log("The list is empty.");
+            return;
+        }
+        // If the list has only one node, set head to null
+        if (!this.head.next) {
+            this.head = null;
+            return;
+        }
+
+        let current = this.head;
+        // Traverse the list to find the second-to-last node
+        while (current.next && current.next.next) {
+            current = current.next;
+        }
+
+        // Remove the last node by setting the second-to-last node's next to null
+        current.next = null;
+    }
+
+    // Method to delete a node with a specific value
+    deleteNodeByValue(value) {
+        if (!this.head) {
+            console.log("The list is empty.");
+            return;
+        }
+
+        // If the node to be deleted is the head node
+        if (this.head.data === value) {
+            this.head = this.head.next;
+            return;
+        }
+
+        // Traverse the list to find the node to delete
+        let current = this.head;
+        while (current.next && current.next.data !== value) {
+            current = current.next;
+        }
+
+        // If the node to be deleted is found
+        if (current.next) {
+            current.next = current.next.next;
+        } else {
+            console.log("Node with value " + value + " not found.");
+        }
+    }
+    // Recursive method to delete node by value
+
+    deleteNodeByValueRecursively(head, value) {
+        // Base case: If head is null (empty list)
+        if (head === null) {
+            console.log("The list is empty.");
+            return null;
+        }
+
+        // If the node to be deleted is the head node
+        if (head.data === value) {
+            return head.next; // Skip the node by returning the next node
+        }
+
+        // Recursive call for the rest of the list
+        head.next = this.deleteNodeByValueRecursively(head.next, value);
+        return head;
+    }
 }
 
 // Example usage

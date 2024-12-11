@@ -78,8 +78,41 @@ class LinkedList {
         System.out.println("null");
     }
 
+    // Method to delete a node from the start (head)
+    public void deleteFromStart() {
+        if (head == null) {
+            System.out.println("The list is empty.");
+            return;
+        }
+        // Move the head to the next node, effectively removing the first node
+        head = head.next;
+    }
+
+    // Method to delete the last node
+    public void deleteLastNode() {
+        if (head == null) {
+            System.out.println("The list is empty.");
+            return;
+        }
+
+        // If there's only one node in the list
+        if (head.next == null) {
+            head = null;
+            return;
+        }
+
+        // Traverse to the second-to-last node
+        Node current = head;
+        while (current.next != null && current.next.next != null) {
+            current = current.next;
+        }
+
+        // Set the next of the second-to-last node to null (removing the last node)
+        current.next = null;
+    }
+
     // Method to delete a node with a specific value
-    public void delete(int value) {
+    public void deleteByValue(int value) {
         if (head == null) {
             System.out.println("List is empty.");
             return;
@@ -98,6 +131,25 @@ class LinkedList {
             current.next = current.next.next;
         }
     }
+
+    // Recursive method to delete node by value
+    public Node deleteNodeByValueRecursively(Node head, int value) {
+        // Base case: If head is null (empty list)
+        if (head == null) {
+            System.out.println("The list is empty.");
+            return null;
+        }
+
+        // If the node to be deleted is the head node
+        if (head.data == value) {
+            return head.next; // Skip the node by returning the next node
+        }
+
+        // Recursive call for the rest of the list
+        head.next = deleteNodeByValueRecursively(head.next, value);
+        return head;
+    }
+
 }
 
 class Main {
@@ -110,7 +162,7 @@ class Main {
         System.out.println("Original List:");
         list.display();
 
-        list.delete(20);
+        list.deleteByValue(20);
         System.out.println("After Deletion:");
         list.display();
     }
