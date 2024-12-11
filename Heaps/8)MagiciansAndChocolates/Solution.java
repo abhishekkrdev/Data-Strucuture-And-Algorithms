@@ -2,7 +2,7 @@
 
 import java.util.*;
 
-public class Solution {
+class Solution {
     public int nchoc(int A, int[] B) {
         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
         int mod = 1000000007;

@@ -2,7 +2,7 @@
 // Up heapify needs to be done.
 // T(n) = O(n log n)
 
-public class MaxHeap {
+class MaxHeap {
     private int[] heap;
     private int size;
     private int capacity;
